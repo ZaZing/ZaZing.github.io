@@ -65,7 +65,7 @@
       <h1 class="site-title">zazing</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">见证</p>
+      <p class="site-subtitle" itemprop="description">博学之，审问之，慎思之，明辨之，笃行之</p>
   </div>
 
   <div class="site-nav-right">
@@ -268,7 +268,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-06-19 18:57:07 / 修改时间：19:36:26" itemprop="dateCreated datePublished" datetime="2021-06-19T18:57:07+08:00">2021-06-19</time>
+      <time title="创建时间：2021-06-19 18:57:07 / 修改时间：21:27:31" itemprop="dateCreated datePublished" datetime="2021-06-19T18:57:07+08:00">2021-06-19</time>
     </span>
 
   
@@ -282,25 +282,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>vmware 虚拟机与主机网络互通方法有好多种，这里介绍最为常用的也是最方便的一种方法：NAT网络共享方法 。</p>
-<h2 id="NAT工作原理"><a href="#NAT工作原理" class="headerlink" title="NAT工作原理"></a>NAT工作原理</h2><p> NAT英文全称是“Network Address Translation”，中文意思是“网络地址转换”，它是一个IETF(Internet Engineering Task Force, Internet工程任务组)标准，允许一个整体机构以一个公用IP（Internet Protocol）地址出现在Internet上。顾名思义，它是一种把内部私有网络地址（IP地址）翻译成合法网络IP地址的技术。 </p>
-<p>VMVare的NAT上网方法是主机和虚拟机之间用软件伪造出一块网卡，与虚拟机处于同一个网段，与主机的网络接口进行NAT。虚拟机发出的每一块数据包都会经过虚拟网卡，然后NAT，根据NAT后的地址进行上网。</p>
-<p><img src="/2021/06/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95-vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91.png" alt="网络流向"></p>
-<h2 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h2><h3 id="VMVare配置"><a href="#VMVare配置" class="headerlink" title="VMVare配置"></a>VMVare配置</h3><p> 在虚拟机菜单栏的“编辑”窗口，选择打开虚拟网络编辑器。</p>
-<p><img src="/2021/06/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95-vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C/vmvare%E9%85%8D%E7%BD%AE1.png" alt="VMVare配置1"></p>
-<p>新建网络”VMnet8”，并选择为”NAT模式”， 可以设置“NAT设置”和“DHCP设置”。</p>
-<p>点击“NAT设置”，打开如下界面。记住设置的网关IP，在后面会用到，网关IP地址应与上图中的子网IP地址处于同一网段。</p>
-<p><img src="/2021/06/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95-vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C/vmvare%E9%85%8D%E7%BD%AE2.png" alt="VMVare配置2"></p>
-<p> 完成以上设置后，点击“确定”，保存即可。 </p>
-<h3 id="Windows虚拟网卡设置"><a href="#Windows虚拟网卡设置" class="headerlink" title="Windows虚拟网卡设置"></a>Windows虚拟网卡设置</h3><p>直接在电脑的任务栏中选中网络那里右键打开  网络和共享中心，在左边点击  更改适配器设置，然后右键选属性打开  VMare Network Adapter VMnet8,  在打开的页面上选   Internet协议版本4，点击属性，在打开的页面设置。</p>
-<p><img src="/2021/06/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95-vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C/windows%E9%85%8D%E7%BD%AE.png" alt="windows配置"></p>
-<h3 id="Linux网络设置"><a href="#Linux网络设置" class="headerlink" title="Linux网络设置"></a>Linux网络设置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33 </span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95-vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C/linux%E9%85%8D%E7%BD%AE.png" alt="Liunx配置"></p>
-<p>配置完成之后，重启网络服务。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
-
-<p>至此，虚拟机就可以与外部通信啦，可以直接ping baidu.com感受下。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B5%8B%E8%AF%95-vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8E%E4%B8%BB%E6%9C%BA%E5%85%B1%E4%BA%AB%E7%BD%91%E7%BB%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
