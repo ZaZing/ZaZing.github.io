@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;zazing.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="随着微服务架构的流行，一次请求往往需要涉及到多个服务，因此服务性能监控和排查就变得更复杂：  不同的服务可能由不同的团队开发、甚至可能使用不同的编程语言来实现 服务有可能布在了几千台服务器，横跨多个不同的数据中心  作为测试人员，如何在架构、链路复杂的系统中，提早发现性能风险，有效定位性能问题，需要有一些可以帮助理解系统行为、用于分析性能问题的工具，以便发生故障的时候，能够快速定位和解决问题，这就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APM初认知">
+<meta property="og:url" content="https://zazing.github.io/2021/03/19/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/index.html">
+<meta property="og:site_name" content="zazing">
+<meta property="og:description" content="随着微服务架构的流行，一次请求往往需要涉及到多个服务，因此服务性能监控和排查就变得更复杂：  不同的服务可能由不同的团队开发、甚至可能使用不同的编程语言来实现 服务有可能布在了几千台服务器，横跨多个不同的数据中心  作为测试人员，如何在架构、链路复杂的系统中，提早发现性能风险，有效定位性能问题，需要有一些可以帮助理解系统行为、用于分析性能问题的工具，以便发生故障的时候，能够快速定位和解决问题，这就">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zazing.github.io/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/03.png">
+<meta property="og:image" content="https://zazing.github.io/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/04.png">
+<meta property="og:image" content="https://zazing.github.io/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/05.png">
+<meta property="og:image" content="https://zazing.github.io/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/06.png">
+<meta property="og:image" content="https://zazing.github.io/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/07.png">
+<meta property="article:published_time" content="2021-03-19T05:23:53.000Z">
+<meta property="article:modified_time" content="2021-06-19T16:05:41.629Z">
+<meta property="article:author" content="zcding">
+<meta property="article:tag" content="性能测试">
+<meta property="article:tag" content="测试工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zazing.github.io/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/03.png">
+
+
+<link rel="canonical" href="https://zazing.github.io/2021/03/19/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;zazing.github.io&#x2F;2021&#x2F;03&#x2F;19&#x2F;APM%E5%88%9D%E8%AE%A4%E7%9F%A5&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;03&#x2F;19&#x2F;APM初认知&#x2F;&quot;,&quot;title&quot;:&quot;APM初认知&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>APM初认知 | zazing</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">zazing</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">博学之，审问之，慎思之，明辨之，笃行之</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SkyWalking%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">SkyWalking介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%B7%A5%E4%BD%9C%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">测试工作应用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zcding</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zazing.github.io/2021/03/19/APM%E5%88%9D%E8%AE%A4%E7%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zcding">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zazing">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          APM初认知
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-19 13:23:53" itemprop="dateCreated datePublished" datetime="2021-03-19T13:23:53+08:00">2021-03-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-20 00:05:41" itemprop="dateModified" datetime="2021-06-20T00:05:41+08:00">2021-06-20</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>随着微服务架构的流行，一次请求往往需要涉及到多个服务，因此服务性能监控和排查就变得更复杂：</p>
+<ul>
+<li>不同的服务可能由不同的团队开发、甚至可能使用不同的编程语言来实现</li>
+<li>服务有可能布在了几千台服务器，横跨多个不同的数据中心</li>
+</ul>
+<p>作为测试人员，如何在架构、链路复杂的系统中，提早发现性能风险，有效定位性能问题，需要有一些可以帮助理解系统行为、用于分析性能问题的工具，以便发生故障的时候，能够快速定位和解决问题，这就是APM系统，全称是（<strong>A</strong>pplication <strong>P</strong>erformance <strong>M</strong>onitor，当然也有叫 <strong>A</strong>pplication <strong>P</strong>erformance <strong>M</strong>anagement tools）</p>
+<p>由于工作的关系，接触到<a target="_blank" rel="noopener" href="https://github.com/apache/skywalking">Skywalking</a>APM平台，对于其架构、能力，以及对测试工作的帮助有了一定的体验。</p>
+<span id="more"></span>
+
+<h2 id="SkyWalking介绍"><a href="#SkyWalking介绍" class="headerlink" title="SkyWalking介绍"></a>SkyWalking介绍</h2><p>SkyWalking 是一个开源监控平台，用于从服务和云原生基础设施收集、分析、聚合和可视化数据。</p>
+<p>SkyWalking 提供了一种简单的方法来维护分布式系统的清晰视图，甚至可以跨云查看。它是一种现代 APM，专门为云原生、基于容器的分布式系统设计。</p>
+<p>SkyWalking 从三个维度对应用进行监视：</p>
+<ul>
+<li>service(服务)</li>
+<li>service instance(实例)</li>
+<li>endpoint(端点)</li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p><strong>压测场景说明</strong></p>
+<p>压测场景：针对XXXX接口进行压测，通过jmeter进行300并发30min压测</p>
+<p>压测时间：2020/5/22 19:30 ~ 2020/5/22 20:00</p>
+<p><strong>案例介绍</strong></p>
+<p>基于该压测场景，介绍性能测试基于SkyWalking平台了解、分析性能测试链路、问题的思路和情况。</p>
+<p>服务拓扑<br>链路分析：[基于服务拓扑图可以辅助业务测试人员了解整体链路架构情况，同时针对核心链路分析响应分层耗时。]</p>
+<p> <strong>分层耗时分析</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>Jmeter</th>
+<th>界面</th>
+<th>服务层（节点1）</th>
+<th>存储（FP存储）</th>
+<th>结果库（MongDB）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SLA（请求成功率）</td>
+<td>100%</td>
+<td>100%</td>
+<td>100%</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>服务器平均响应时间</td>
+<td>2629ms</td>
+<td>2704ms</td>
+<td>862ms</td>
+<td>419ms</td>
+<td>100ms</td>
+</tr>
+<tr>
+<td>平均吞吐量</td>
+<td>6834cpm</td>
+<td>5824cpm</td>
+<td>4600cpm，总三个节点每分钟访问次数约为2k，分发均匀</td>
+<td>8545cpm</td>
+<td>1176cpm</td>
+</tr>
+<tr>
+<td>响应时间占比</td>
+<td>P90:6.862s；   P95：7.888s</td>
+<td>P75：后期震荡上升并保持在6s；   P90：稳定在7s左右；</td>
+<td>P90：90%的服务层响应时间波动较大，压测前期小于1s，略微波动5s；压测后半段，P90响应时间为4.6s，意味着10%的服务器响应时间已超过4.6s。   P75   : 75%的服务层响应时间较为稳定，均小于1s。</td>
+<td>P90：响应耗时稳定在450ms</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>分析结论：</p>
+<p>300并发下接口成功率100%，平均响应耗时2.7s；P50响应时间为1s，P75响应时间为5s，p90时间为7s；服务层查询平均耗时为800ms，P75响应耗时低于1s，压测后半段P90响应时间超过5s，FP响应耗时P95趋势与服务层一致，主要耗时是由于FP查询响应耗时引起。</p>
+<p>-现象1：接口响应时间主要瓶颈在服务层接口返回到界面阶段，整体平均耗时2.7s，服务层向后阶段平均耗时为800ms；</p>
+<p>-现象2：接口层面P75响应耗时超过5s，整体使用体验不佳；</p>
+<p>-现象3：服务层在压测后半段整体耗时增加</p>
+<p><strong>服务调用耗时分析</strong></p>
+<p><em>[<strong>针对</strong>Http<strong>调用链路，提供了服务端和客户端的调用视角</strong>]</em></p>
+<p>以XXX为例，界面下发请求，内部处理后调用服务层人员基本信息接口。</p>
+<p>服务端视角：</p>
+<p>服务层处理耗时平均响应耗时为862ms，平均吞吐量为4271cpm，整体耗时趋势较为稳定。</p>
+<p>客户端视角：</p>
+<p>界面作为客户端，直接调用服务层接口平均耗时为2501ms，与服务层时延1700ms，由上一步数据可知界面整体耗时2700ms，内部处理约200ms，整体耗时瓶颈在Web界面与服务层间，可能是线程等待、连接等待或者网络延迟，需要做金一部分分析。</p>
+<p><strong>进程分析</strong></p>
+<p>主要为java进程，观察java进程在压测阶段内运行情况。</p>
+<p>服务层分析：</p>
+<p>服务层30min运行正常，出现一次fullgc，耗时1s，这个也可以解释服务层在这个时间点上响应时间有波动。</p>
+<p>界面分析：</p>
+<p>未出现java运行过程问题。</p>
+<p>趋势比对</p>
+<p>界面响应耗时与服务层响应耗时、平均吞吐量进行趋势对比，整体趋势保持一致，业务运行稳定。</p>
+<p><img src="/./APM%E5%88%9D%E8%AE%A4%E7%9F%A5/03.png" alt="运行趋势"></p>
+<p>2.1.4 慢业务分析   </p>
+<p><img src="/./APM%E5%88%9D%E8%AE%A4%E7%9F%A5/04.png" alt="慢业务分析"></p>
+<p>2.2 问题案例</p>
+<p>服务层开启鉴权后进程频繁GC。</p>
+<p>原因：服务层优化数据鉴权，修改为获取鉴权数据加载到内存，导致并发下内存快速增长，不断GC，导致进程处于STW状态，整体耗时增加，处理能力下降。</p>
+<p><img src="/./APM%E5%88%9D%E8%AE%A4%E7%9F%A5/05.png" alt="进程"></p>
+<p>MongoDB服务查询耗时较高，导致整体业务耗时长。</p>
+<p>原因：压测时使用同一账号进行压测，数据结果保存在同一个Collection中，且未建索引，导致mongo慢查询较多。调整账号登录机制。</p>
+<p><img src="/./APM%E5%88%9D%E8%AE%A4%E7%9F%A5/06.png" alt="mongo耗时"></p>
+<p>查询响应成功率低于100%</p>
+<p><img src="/./APM%E5%88%9D%E8%AE%A4%E7%9F%A5/07.png" alt="查询成功率"></p>
+<h2 id="测试工作应用"><a href="#测试工作应用" class="headerlink" title="测试工作应用"></a>测试工作应用</h2><p><strong>性能冒烟测试</strong></p>
+<p>对于一些不成熟的项目团队来说，在每个项目周期都进行性能压测其实是一件非常难落地的事情，由于人力、技术以及时间的客观条件，导致在测试周期内无法有效的暴露性能问题。那类似功能测试冒烟一样，在功能测试阶段也引入性能测试冒烟的概念，通过APM的持续监测，配合测试环境资源监测手段，在功能测试阶段提前发现异常性能的接口和资源，包括请求耗时长、异常请求，异常的java进程等。</p>
+<p><strong>性能问题定位</strong></p>
+<p>APM提供了方法级别的耗时定位以及链路的跟踪，在压测阶段，可以针对问题接口进行深度的分析，增加了测试人员对性能问题定位的能力和手段。</p>
+<p><strong>业务架构学习</strong></p>
+<p>在以往的测试工作中，测试人员对于架构的了解、链路的学习主要来自研发的设计文档、业务日志和业务的讲解，通过APM监测平台又增加了一个能够帮助测试人员了解接口级别的调用情况，从而更好的理解业务逻辑，丰富测试设计。</p>
+<p>ps：对于某些设计文档不友好的团队，APM算是能解决测试的通点问题。</p>
+<p>pps：虽然有了工具，但测试人员还是要推动项目规范化，推动研发产出对应的设计文档、维护文档。</p>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag"># 性能测试</a>
+              <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" rel="tag"># 测试工具</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/23/%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA1-%E5%9F%BA%E4%BA%8E%E4%B8%9A%E5%8A%A1%E9%A3%8E%E9%99%A9%E8%A6%86%E7%9B%96%E5%BA%A6/" rel="next" title="用例设计方法论1-基于业务风险覆盖度">
+                  用例设计方法论1-基于业务风险覆盖度 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zcding</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

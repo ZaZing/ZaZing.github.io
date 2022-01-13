@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;zazing.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="缺陷严重等级是指缺陷引起的故障对产品的影响程度；缺陷严重等级是根据其表现出的现象及影响面进行评估而定义的，等级可分为致命、严重、中等、轻微。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="缺陷严重等级定义">
+<meta property="og:url" content="https://zazing.github.io/2021/06/19/%E7%BC%BA%E9%99%B7%E4%B8%A5%E9%87%8D%E7%AD%89%E7%BA%A7%E5%AE%9A%E4%B9%89/index.html">
+<meta property="og:site_name" content="zazing">
+<meta property="og:description" content="缺陷严重等级是指缺陷引起的故障对产品的影响程度；缺陷严重等级是根据其表现出的现象及影响面进行评估而定义的，等级可分为致命、严重、中等、轻微。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-19T15:12:18.000Z">
+<meta property="article:modified_time" content="2021-06-19T15:16:43.411Z">
+<meta property="article:author" content="zcding">
+<meta property="article:tag" content="测试基础">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zazing.github.io/2021/06/19/%E7%BC%BA%E9%99%B7%E4%B8%A5%E9%87%8D%E7%AD%89%E7%BA%A7%E5%AE%9A%E4%B9%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;zazing.github.io&#x2F;2021&#x2F;06&#x2F;19&#x2F;%E7%BC%BA%E9%99%B7%E4%B8%A5%E9%87%8D%E7%AD%89%E7%BA%A7%E5%AE%9A%E4%B9%89&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;19&#x2F;缺陷严重等级定义&#x2F;&quot;,&quot;title&quot;:&quot;缺陷严重等级定义&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>缺陷严重等级定义 | zazing</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">zazing</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">博学之，审问之，慎思之，明辨之，笃行之</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zcding</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zazing.github.io/2021/06/19/%E7%BC%BA%E9%99%B7%E4%B8%A5%E9%87%8D%E7%AD%89%E7%BA%A7%E5%AE%9A%E4%B9%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zcding">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zazing">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          缺陷严重等级定义
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-06-19 23:12:18 / 修改时间：23:16:43" itemprop="dateCreated datePublished" datetime="2021-06-19T23:12:18+08:00">2021-06-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>缺陷严重等级是指缺陷引起的故障对产品的影响程度；缺陷严重等级是根据其表现出的现象及影响面进行评估而定义的，等级可分为致命、严重、中等、轻微。 </p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>缺陷 等级 标识</th>
+<th>缺陷 严重 等级</th>
+<th>等级定义</th>
+<th>影响示例描述（包含但不仅限于）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主要缺 陷</td>
+<td>致命</td>
+<td>系统瘫痪或资源严重不足，系统核心重要功能无法正常使用。</td>
+<td>1、由于程序引起的系统死机，非法退出，系统无 法正常运作等； 2、因错误操作导致客户端/服务器崩溃、程序僵 死等； 3、数据库发生死锁或与数据库连接等错误，系统 无法正常运行； 4、严重的计算错误、内部设计逻辑、核心功能设 计死循环等问题；</td>
+</tr>
+<tr>
+<td></td>
+<td>严重</td>
+<td>系统的主要功能部分丧失，数据不能保存，系统的次要功能完全丧失，系统所提供的功 能或服务受到明显影响，且没有办法更正。（重新安装或重启不属于更新办法）</td>
+<td>1、主业务流程对应的功能缺失、无法正常使用或 实现不正确，造成部分测试用例阻塞； 2、严重的兼容性问题和页面样式问题，如：页面 样式严重错乱，导致页面控件无法正常定位； 3、程序实现与需求功能上不符，存在严重的设计 问题； 4、主要数值计算错误； 5、严重的功能逻辑错误； 6、性能与预期相差较大；</td>
+</tr>
+<tr>
+<td></td>
+<td>中等</td>
+<td>系统主体功能运行基本正常，但存在部分功能没有完全实现或存在异常。</td>
+<td>1、操作界面错误或不规范（详细文档，包括数据 窗口内列名定义、含义是否一致）； 2、日志打印内容错误，如：查询请求耗时计算不 准确、日志级别错误等问题； 3、查询错误，数据错误显示； 4、数据库的表、业务规则、缺省值为加完整性等 约束条件； 5、简单的输入限制未放在前台进行控制； 6、不可逆（如删除操作）的操作无提示或提示信 息与功能不一致； 7、程序内部实现逻辑与期望结果、设计文档不一 致；</td>
+</tr>
+<tr>
+<td>次要缺 陷</td>
+<td>轻微</td>
+<td>使操作者不方便或遇到麻烦，但不影响功能的操作和执行。</td>
+<td>1、界面不规范或辅助说明描述不清楚； 2、显示格式（输入、输出）不规范； 3、长时间操作未给用户进度提示； 4、提示窗口文字未采用行业术语、提示信息存在 错别字等； 5、可输入区域和只读区域没有明显的区分标志。</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/" rel="tag"># 测试基础</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/19/Metersphere%E5%AD%A6%E4%B9%A0/" rel="prev" title="Metersphere学习">
+                  <i class="fa fa-chevron-left"></i> Metersphere学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/09/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5/" rel="next" title="自动化测试平台实践">
+                  自动化测试平台实践 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zcding</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

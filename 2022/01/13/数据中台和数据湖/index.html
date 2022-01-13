@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;zazing.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="大数据的发展历史启蒙时代：数据仓库的出现技术革命：从Hadoop到数据湖数据工厂时代：大数据平台兴起一、数据湖的定义维基百科上定义，数据湖（Data Lake）是一个以原始格式存储数据的存储库或系统。它按原样存储数据，而无需事先对数据进行结构化处理。一个数据湖可以存储结构化数据（如关系型数据库中的表），半结构化数据（如CSV、日志、XML、JSON），非结构化数据（如电子邮件、文档、PDF）和二进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zazing">
+<meta property="og:url" content="https://zazing.github.io/2022/01/13/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B9%96/index.html">
+<meta property="og:site_name" content="zazing">
+<meta property="og:description" content="大数据的发展历史启蒙时代：数据仓库的出现技术革命：从Hadoop到数据湖数据工厂时代：大数据平台兴起一、数据湖的定义维基百科上定义，数据湖（Data Lake）是一个以原始格式存储数据的存储库或系统。它按原样存储数据，而无需事先对数据进行结构化处理。一个数据湖可以存储结构化数据（如关系型数据库中的表），半结构化数据（如CSV、日志、XML、JSON），非结构化数据（如电子邮件、文档、PDF）和二进">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-13T12:33:04.376Z">
+<meta property="article:modified_time" content="2022-01-13T12:31:54.427Z">
+<meta property="article:author" content="zcding">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zazing.github.io/2022/01/13/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B9%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;zazing.github.io&#x2F;2022&#x2F;01&#x2F;13&#x2F;%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B9%96&#x2F;&quot;,&quot;path&quot;:&quot;2022&#x2F;01&#x2F;13&#x2F;数据中台和数据湖&#x2F;&quot;,&quot;title&quot;:&quot;&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title> | zazing</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">zazing</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">博学之，审问之，慎思之，明辨之，笃行之</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">大数据的发展历史</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E8%92%99%E6%97%B6%E4%BB%A3%EF%BC%9A%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E7%9A%84%E5%87%BA%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">启蒙时代：数据仓库的出现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%9D%A9%E5%91%BD%EF%BC%9A%E4%BB%8EHadoop%E5%88%B0%E6%95%B0%E6%8D%AE%E6%B9%96"><span class="nav-number">1.2.</span> <span class="nav-text">技术革命：从Hadoop到数据湖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%8E%82%E6%97%B6%E4%BB%A3%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%85%B4%E8%B5%B7"><span class="nav-number">1.3.</span> <span class="nav-text">数据工厂时代：大数据平台兴起</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E6%B9%96%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">一、数据湖的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">二、数据中台的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E6%B9%96%E4%B8%8E%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E6%95%B0%E6%8D%AE%E6%B9%96%E5%92%8C%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">三、数据湖与数据中台的关系，数据湖和数据中台的区别</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zcding</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zazing.github.io/2022/01/13/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B9%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zcding">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zazing">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-13 20:33:04 / 修改时间：20:31:54" itemprop="dateCreated datePublished" datetime="2022-01-13T20:33:04+08:00">2022-01-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="大数据的发展历史"><a href="#大数据的发展历史" class="headerlink" title="大数据的发展历史"></a>大数据的发展历史</h1><h2 id="启蒙时代：数据仓库的出现"><a href="#启蒙时代：数据仓库的出现" class="headerlink" title="启蒙时代：数据仓库的出现"></a>启蒙时代：数据仓库的出现</h2><h2 id="技术革命：从Hadoop到数据湖"><a href="#技术革命：从Hadoop到数据湖" class="headerlink" title="技术革命：从Hadoop到数据湖"></a>技术革命：从Hadoop到数据湖</h2><h2 id="数据工厂时代：大数据平台兴起"><a href="#数据工厂时代：大数据平台兴起" class="headerlink" title="数据工厂时代：大数据平台兴起"></a>数据工厂时代：大数据平台兴起</h2><h4 id="一、数据湖的定义"><a href="#一、数据湖的定义" class="headerlink" title="一、数据湖的定义"></a><strong>一、数据湖的定义</strong></h4><p>维基百科上定义，数据湖（Data Lake）是一个以原始格式存储数据的存储库或系统。它按原样存储数据，而无需事先对数据进行结构化处理。一个数据湖可以存储结构化数据（如关系型数据库中的表），半结构化数据（如CSV、日志、XML、JSON），非结构化数据（如电子邮件、文档、PDF）和二进制数据（如图形、音频、视频）。</p>
+<p>但是随着大数据技术的融合发展，数据湖不断演变，汇集了各种技术，包括数据仓库、实时和高速数据流技术、数据挖掘、深度学习、分布式存储和其他技术。逐渐发展成为一个可以存储所有结构化和非结构化任意规模数据，并可以运行不同类型的大数据工具，对数据进行大数据处理、实时分析和机器学习等操作的统一数据管理平台。</p>
+<h4 id="二、数据中台的定义"><a href="#二、数据中台的定义" class="headerlink" title="二、数据中台的定义"></a><strong>二、数据中台的定义</strong></h4><p>2016年，阿里巴巴率先提出来“数据中台”的口号，通俗来讲，数据中台是一套可持续“让企业的数据用起来”的机制，一种战略选择和组织形式，是依据企业特有的业务模式和组织架构，通过有形的产品和实施方法论支撑，构建一套持续不断把数据变成资产并服务于业务的机制。数据中台的核心，是避免数据的重复计算，通过数据服务化，提高数据的共享能力，赋能应用数据。</p>
+<h4 id="三、数据湖与数据中台的关系，数据湖和数据中台的区别"><a href="#三、数据湖与数据中台的关系，数据湖和数据中台的区别" class="headerlink" title="三、数据湖与数据中台的关系，数据湖和数据中台的区别"></a><strong>三、数据湖与数据中台的关系，数据湖和数据中台的区别</strong></h4><p>大数据时代，数据量越来越多，数据形式日益复杂，而以数据仓库为代表的、现有的数据存储和处理技术无法满足海量、多样的数据处理需求的背景下产生的。“数据湖”是将复杂的事物具象化，偏技术一些，以一个形象的名字，反应了它在大数据存储和大数据处理方面的优势和能力。</p>
+<p>数据湖作为一个集中的存储库，可以在其中存储任何形式（结构化和非结构化）、任意规模的数据。在数据湖中，可以不对存储的数据进行结构化，只有在使用数据的时候，再利用数据湖强大的大数据查询、处理、分析等组件对数据进行处理和应用。因此，数据湖具备运行不同类型数据分析的能力。</p>
+<p>数据中台从技术的层面承接了数据湖的技术，通过数据技术，对海量、多源、多样的数据进行采集、处理、存储、计算，同时统一标准和口径，把数据统一之后，以标准形式存储，形成大数据资产层，以满足前台数据分析和应用的需求。</p>
+<p>数据湖更强调应用，离业务更近，强调服务于前台的能力，实现逻辑、算法、标签、模型、数据资产的沉淀和复用，能更快速的相应业务和应用开发的需求，可追溯，更精准。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/13/1.1Hive%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zcding</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
