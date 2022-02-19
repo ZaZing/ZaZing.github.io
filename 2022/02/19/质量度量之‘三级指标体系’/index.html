@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;zazing.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="本文摘自TesterHome论坛博文 [质量度量之“三级指标体系”] ，个人觉得很好的诠释了从测试、质量的视角，对为什么要做指标、怎么做指标、以及需要达成的目标有一个整体的讲解。  管理学大师彼得 - 德鲁克曾说过：无数据不管理。 数字是人们快速认知事物的一种有效方式。无论在生活还是工作，对事还是对人都息息相关。碰上难以的用数字描述事物或现象肯定是没有找对适用的指标和度量方式。尤其对于质量工程方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="质量度量之&#39;三级指标体系&#39;">
+<meta property="og:url" content="https://zazing.github.io/2022/02/19/%E8%B4%A8%E9%87%8F%E5%BA%A6%E9%87%8F%E4%B9%8B%E2%80%98%E4%B8%89%E7%BA%A7%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB%E2%80%99/index.html">
+<meta property="og:site_name" content="zazing">
+<meta property="og:description" content="本文摘自TesterHome论坛博文 [质量度量之“三级指标体系”] ，个人觉得很好的诠释了从测试、质量的视角，对为什么要做指标、怎么做指标、以及需要达成的目标有一个整体的讲解。  管理学大师彼得 - 德鲁克曾说过：无数据不管理。 数字是人们快速认知事物的一种有效方式。无论在生活还是工作，对事还是对人都息息相关。碰上难以的用数字描述事物或现象肯定是没有找对适用的指标和度量方式。尤其对于质量工程方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://testerhome.com/uploads/photo/2022/4aa85569-41ff-4e09-94be-cf7eaa9759b4.jpg!large">
+<meta property="og:image" content="https://testerhome.com/uploads/photo/2022/330b1318-cd00-47ea-828c-2e9238168a70.jpg!large">
+<meta property="og:image" content="https://testerhome.com/uploads/photo/2022/f7d0e282-c648-419b-866e-5a5b2693d41a.jpg!large">
+<meta property="og:image" content="https://testerhome.com/uploads/photo/2022/f119fda9-bae9-437b-b2e9-e95933051696.jpg!large">
+<meta property="og:image" content="https://testerhome.com/uploads/photo/2022/aa4c9a35-54bc-4c03-a667-e53d99ee361e.jpg!large">
+<meta property="article:published_time" content="2022-02-19T03:16:41.000Z">
+<meta property="article:modified_time" content="2022-02-19T03:43:01.205Z">
+<meta property="article:author" content="zcding">
+<meta property="article:tag" content="质量度量">
+<meta property="article:tag" content="指标">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://testerhome.com/uploads/photo/2022/4aa85569-41ff-4e09-94be-cf7eaa9759b4.jpg!large">
+
+
+<link rel="canonical" href="https://zazing.github.io/2022/02/19/%E8%B4%A8%E9%87%8F%E5%BA%A6%E9%87%8F%E4%B9%8B%E2%80%98%E4%B8%89%E7%BA%A7%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB%E2%80%99/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;zazing.github.io&#x2F;2022&#x2F;02&#x2F;19&#x2F;%E8%B4%A8%E9%87%8F%E5%BA%A6%E9%87%8F%E4%B9%8B%E2%80%98%E4%B8%89%E7%BA%A7%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB%E2%80%99&#x2F;&quot;,&quot;path&quot;:&quot;2022&#x2F;02&#x2F;19&#x2F;质量度量之‘三级指标体系’&#x2F;&quot;,&quot;title&quot;:&quot;质量度量之&#39;三级指标体系&#39;&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>质量度量之'三级指标体系' | zazing</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">zazing</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">博学之，审问之，慎思之，明辨之，笃行之</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%A0%87%E5%B1%82%E7%BA%A7"><span class="nav-number">1.</span> <span class="nav-text">指标层级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%88%E7%8E%87"><span class="nav-number">2.</span> <span class="nav-text">一、效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%B4%A8%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">二、质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%A8%B3%E5%AE%9A"><span class="nav-number">4.</span> <span class="nav-text">三、稳定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%B5%84%E6%BA%90"><span class="nav-number">5.</span> <span class="nav-text">四、资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zcding</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zazing.github.io/2022/02/19/%E8%B4%A8%E9%87%8F%E5%BA%A6%E9%87%8F%E4%B9%8B%E2%80%98%E4%B8%89%E7%BA%A7%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB%E2%80%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zcding">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zazing">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          质量度量之'三级指标体系'
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-02-19 11:16:41 / 修改时间：11:43:01" itemprop="dateCreated datePublished" datetime="2022-02-19T11:16:41+08:00">2022-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B4%A8%E9%87%8F%E4%BD%93%E7%B3%BB/" itemprop="url" rel="index"><span itemprop="name">质量体系</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>本文摘自TesterHome论坛博文 [<a target="_blank" rel="noopener" href="https://testerhome.com/topics/32301">质量度量之“三级指标体系”</a>] ，个人觉得很好的诠释了从测试、质量的视角，对为什么要做指标、怎么做指标、以及需要达成的目标有一个整体的讲解。</p>
+</blockquote>
+<p>管理学大师彼得 - 德鲁克曾说过：无数据不管理。</p>
+<p>数字是人们快速认知事物的一种有效方式。无论在生活还是工作，对事还是对人都息息相关。碰上难以的用数字描述事物或现象肯定是没有找对适用的指标和度量方式。尤其对于质量工程方面的工作，定量的呈现远比定性描述更有说服力。而 “三级指标体系” 就是在这一年的反复打磨中，逐渐清晰并成型的，能够将工程质量加以体系化度量的一种最佳实践。</p>
+<span id="more"></span>
+
+<h2 id="指标层级"><a href="#指标层级" class="headerlink" title="指标层级"></a>指标层级</h2><p>通过一级指标，直观反馈在工程化过程中某个方面的水准，具有结果性质的指标，类似 “后视镜” 的作用，但也具有较大之后性且粒度较大；从而引入二级指标，对大颗粒度的一级指标进行拆解，分而治之以获取改善。由于粒度的均匀程度问题，需进一步纳入三级指标才具备可操作性，以便着手改善以最终影响到结果。通常情况下，三级指标即可起到有效的下钻分析并落入改进闭环的效果。</p>
+<p><a target="_blank" rel="noopener" href="https://testerhome.com/uploads/photo/2022/4aa85569-41ff-4e09-94be-cf7eaa9759b4.jpg!large"><img src="https://testerhome.com/uploads/photo/2022/4aa85569-41ff-4e09-94be-cf7eaa9759b4.jpg!large" alt="img"></a></p>
+<p>通过实践归纳，选取效率、质量、稳定、资源四个方面共同构建三级指标体系。四个方面的关系可描述为质量是立命之本，稳定是有效质量活动的自然结果；业务方期望的是有质量地（约束条件）快速交付，且尽可能少的资源投入，其中也隐含着对资源的高效利用的诉求。</p>
+<p>简而言之就是 “多、快、好、省” 地把活干了。三级指标分别指的是：</p>
+<ul>
+<li>一级指标，即结果指标。起到 “后视镜” 的作用，有一定的延迟性。</li>
+<li>二级指标，即拆解指标/改善指标。对结果形成进行构成拆解或者直接可以作用以改善结果。</li>
+<li>三级指标，即改善指标。可以对应到一个或一组改进行为以获取对结果的部分改善。</li>
+</ul>
+<p>下文针对上述四个方面一一展开相应三级指标构成、内在逻辑及应用说明。</p>
+<h2 id="一、效率"><a href="#一、效率" class="headerlink" title="一、效率"></a>一、效率</h2><p>效率是工程团队与业务团队沟通的热点话题，也是工程团队被诟病的高频方面。从面向高效交付的质量保障工作为切口，进行应用说明。</p>
+<p><a target="_blank" rel="noopener" href="https://testerhome.com/uploads/photo/2022/330b1318-cd00-47ea-828c-2e9238168a70.jpg!large"><img src="https://testerhome.com/uploads/photo/2022/330b1318-cd00-47ea-828c-2e9238168a70.jpg!large" alt="img"></a></p>
+<p>效率方面，通过业务交付能力、计划保障能力以及过程协同能力自底向上逐级支撑与保障以实现高效的目的，也就是用数据呈现 “多” 与 “快”。</p>
+<p>业务交付与响应，通过吞吐率这一相对值体现；绝对值方面采用总需求数对照观测，而需求上线率、需求分布体现的是对计划的保障能力。指标方面反映了业务方提了多少需求，排上了多少需求，排上了多少大需求，排上的按时完成了多少。</p>
+<p>进而下钻到协同效率体现，其依赖于估时精准性，而过程中准时提测率作为契约支撑，自动化率以及工程配套可用率影响着测试执行效率。这趴指标侧重实施过程的能力说明，属于 “肌肉” 展示。解释了为什么能以及如何能保障效率。此处隐去了众多三级指标，以便清晰说明（下同）。</p>
+<h2 id="二、质量"><a href="#二、质量" class="headerlink" title="二、质量"></a>二、质量</h2><p>软件的质量是开发出来的，程序（制品）一旦流转至测试流程后即被固化。这里指的是内建质量，是客观的程序质量。所有的测试行为是对这一客观质量的挖掘。因此，测试行为是通过场景覆盖尽可能地逼近这一客观的质量活动。</p>
+<p>通常情况下，设置合理的准入标准有利于提前终止不达标制品的流转，保障流程的顺畅性，将提测质量独立度量，并对提测前进行延展收集成因数据以便形成结论。</p>
+<p><a target="_blank" rel="noopener" href="https://testerhome.com/uploads/photo/2022/f7d0e282-c648-419b-866e-5a5b2693d41a.jpg!large"><img src="https://testerhome.com/uploads/photo/2022/f7d0e282-c648-419b-866e-5a5b2693d41a.jpg!large" alt="img"></a></p>
+<p>提测质量是质量门禁的卡尺，是让研发流水线中的质量活动顺畅进行的必要保障。工程上，对于质量活动的投入为被动投入，即不可少，但期望尽可能减少投入。因此质量门禁的设置可以用相对低成本的方式，避免不必要的过渡资源消耗，就好比给汽车上蜡前，先让洗车工把车冲洗干净；否则，上蜡工不得不花费更多的时间去除车上覆盖的尘土，再进入关键工序。如下图，从缺陷成本曲线来看，是笔不划算的投入。</p>
+<p>而内建质量，是一系列质量活动之后自然的描述结果。其中，缺陷引入率是最直接的描述。缺陷数这一绝对数量，结合其构成即缺陷分布，能够描述较为清晰的内建质量。</p>
+<p><a target="_blank" rel="noopener" href="https://testerhome.com/uploads/photo/2022/f119fda9-bae9-437b-b2e9-e95933051696.jpg!large"><img src="https://testerhome.com/uploads/photo/2022/f119fda9-bae9-437b-b2e9-e95933051696.jpg!large" alt="img"></a></p>
+<p>职能的作用是什么？这一灵魂拷问结合上图做必要的说明，从价值视角阐述其内在导向以及良性的促进闭环逻辑。</p>
+<p>测试执行从价值视角切入，尽可能体现质量活动投入而产生的价值，从缺陷价值、回归价值两发面着手并形成正向闭环指导测试设计。简而言之：</p>
+<ul>
+<li>发现高价值缺陷。结合 PRD 及技术实现，覆盖用户场景的同时，刻意针对技术实现方式设计用例。如幂等校验、异常处理等。并参考覆盖率报告增补用例，确保覆盖相对全面性。</li>
+<li>自动化高价值回归用例。抓住核心、稳定两个关键词，随着回归用例的与日俱增，定期 review 进行有效用例增补与无效用例剔除以减少不必要的维护成本。</li>
+</ul>
+<h2 id="三、稳定"><a href="#三、稳定" class="headerlink" title="三、稳定"></a>三、稳定</h2><p>稳定，一般情况下是有效质量保障的自然结果。往往由运维团队主导，对线上进行实时监控，故障应急响应。生产故障数及其分布是主要核准指标。策略上遵从：不出大问题，小问题快速恢复，将故障影响尽可能最小化，即：故障影响 = 故障严重等级 x 故障修复时长。</p>
+<p>具体指标表现为 P1P2 生产故障数减少或清零，P3P4 生产故障数收敛减少。通常故障定级标准，除了影响面作为一个维度，如资损金额、客诉量等，也会将故障恢复时间作为一个必要维度进行阶梯式定义。</p>
+<p>另外，由于生产故障的滞后性，针对某次生产故障的复盘而产生的待办项是有效改善上述结果指标的措施，所以，待办闭环率是该方面的改善指标。</p>
+<p>此处需要说明的是，系统性的风险累计最终会导致某次生产故障。这是质量保障工作的 “黑天鹅事件”，也是最难解释质保策略有效性的部分。老 J 给出的说法是质量保障和稳定性治理双管齐下，互相补充。局部的优化即使达到炉火纯青的地步，难抵一次结构性的破坏。而生产故障驱动的系统性复盘能够指导局部优化策略的迭代，使其更加夯实与全面。所以，这是整体与局部的二元互补增强的循环过程。</p>
+<h2 id="四、资源"><a href="#四、资源" class="headerlink" title="四、资源"></a>四、资源</h2><p>提及资源，主要聚焦在人的维度进行最优配置，即：面向目标，将合适的人用在合适的的地方，并发挥出效益。围绕着下面三个方面进行动态调优。</p>
+<ul>
+<li>配置多少人？</li>
+<li>集中用在哪？</li>
+<li>效益如何放大？</li>
+</ul>
+<p>这是一个配置策略的问题，而策略本身源于目标，在一段时间内解决一个什么样的问题，应该符合 “SMART 原则” 而设定与开展。</p>
+<p><a target="_blank" rel="noopener" href="https://testerhome.com/uploads/photo/2022/aa4c9a35-54bc-4c03-a667-e53d99ee361e.jpg!large"><img src="https://testerhome.com/uploads/photo/2022/aa4c9a35-54bc-4c03-a667-e53d99ee361e.jpg!large" alt="img"></a></p>
+<p>分别引入资源开测比、预实比及直接反馈职能效益的时均用例执行数与上述三个方面一一对应。其中：</p>
+<ul>
+<li>资源开测比反映的是增益投入（开发）与被动投入（测试）的结果。</li>
+<li>预实比反应的是资源利用率及有效投入情况。</li>
+<li>时均用例执行数是反映职能从事质量活动的效率水平。依赖内建质量质量、协同效率、测试策略及配套工程手段的综合情况。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>“无数据不管理”。数据是工作过程中的一种低成本沟通方式。定性的描述，故事性的讲解都不如定量的摆事实来的直接与高效。</p>
+<p>总结下三级指标指的是：</p>
+<ul>
+<li>一级指标，即结果指标。起到 “后视镜” 的作用，有一定的延迟性。</li>
+<li>二级指标，即拆解指标/改善指标。对结果形成进行构成拆解或者直接可以作用以改善结果。</li>
+<li>三级指标，即改善指标。可以对应到一个或一组改进行为以获取对结果的部分改善。</li>
+</ul>
+<p>“三级指标体系” 能够将工程质量加以体系化度量的一种最佳实践。历经基线建立，数据校准，特别是与体感的拟合，这也是体系打磨的主体工作，极为耗时耗力，最后是系统化收集与可视化呈现，让数据实时服务于日常工作。</p>
+<p>效率、质量、稳定、资源四个方面的关系可描述为一下三句话：</p>
+<ol>
+<li>质量是职能线立命之本，稳定是有效质量活动的自然结果；</li>
+<li>累加效率这一约束条件，以实现有质量地快速交付；</li>
+<li>同时，尽可能少的投入资源。</li>
+</ol>
+<p>三级指标体系是系统化的、体感拟合的、可持续积累的研发数字化资产。随着持续的积累与应用，可以通过局部组合解决特定阶段的工程问题，如组合冒烟通过率、冒烟缺陷率、延期提测率反应提测质量，即门禁质量。而针对其组合指标的改进行为是被验证过的有效措施，通过总结落入一套 “专家意见库”，成为团队的经验与可复制能力，甚至是企业的无形财富。</p>
+<p>同样，结合上线前的质量评审机制，通过对测试前、中、后三个阶段，选取组合并通过算法计算而形成质量风险预警效果的 “红绿灯” 提示，是数据可视化应用的一种有效尝试。</p>
+<p>综上，设计一套有效的指标体系，并不断积累数据，能帮助我们选取合理、科学的路径实现一个个工程目标的达成。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%B4%A8%E9%87%8F%E5%BA%A6%E9%87%8F/" rel="tag"># 质量度量</a>
+              <a href="/tags/%E6%8C%87%E6%A0%87/" rel="tag"># 指标</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/19/Hive%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" rel="prev" title="Hive基本操作">
+                  <i class="fa fa-chevron-left"></i> Hive基本操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/02/19/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B9%96/" rel="next" title="数据湖和数据仓库的差异">
+                  数据湖和数据仓库的差异 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zcding</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
